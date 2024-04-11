@@ -30,6 +30,7 @@
     "emitDecoratorMetadata": true
   },
   "include": [
+    "global.d.ts",
     "./src/**/*.ts",
     "./test/**/*.ts"
   ],
