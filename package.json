@@ -4,7 +4,6 @@
   "description": "typescript node js api",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "lint": "eslint ./src ./test --ext .ts",
     "lint:fix": "eslint ./src ./test --ext .ts --fix",
@@ -12,6 +11,7 @@
     "dev": "ts-node-dev 'src/index.ts'",
     "prettier": "prettier --check  'src/**/*.ts' 'test/**/*.ts'",
     "prettier:fix": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
+    "test": "jest",
     "test:functional": "jest --projects ./test --runInBand"
   },
   "author": "Victor Meneghini",
@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@overnightjs/core": "^1.7.6",
+    "axios": "^1.6.8",
     "express": "^4.19.2",
     "module-alias": "^2.2.3"
   }
