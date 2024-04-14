@@ -1,10 +1,16 @@
 import { Controller, Get } from "@overnightjs/core";
+import { StormGlass } from "@src/clients/stormGlass";
+import c from "config";
 import { Request, Response } from "express";
 
 @Controller("forecast")
 export class ForecastController {
   @Get("")
   public getForecastForLoggedUser(req: Request, res: Response): void {
+    const x = new StormGlass()
+
+    x.fetchPoints(100, 300)
+
     res.json([
       {
         time: "2020-04-26T00:00:00+00:00",
