@@ -1,4 +1,5 @@
 import { ForecastPoint, StormGlass } from "@src/clients/stormGlass";
+import { InternalError } from "@src/util/errors/internal-erros";
 
 
 export enum BeachPosition {
@@ -27,11 +28,16 @@ interface GroupedForecasts {
   [key: string]: BeachForecast[];
 }
 
+export class ForecastProcessingInternalError extends InternalError {
+  constructor(message: string) {
+    super(`Unexpected error during the forecast processing: ${message}`)
+  }
+}
+
 export class Forecast {
   constructor(protected stormGlass = new StormGlass()) { }
 
   public async processForecastForBeaches(beaches: Beach[]): Promise<TimeForecast[]> {
-
     try {
       const forecastPromises = beaches.map(beach =>
         this.stormGlass.fetchPoints(beach.lat, beach.lng).then(points =>
@@ -59,8 +65,7 @@ export class Forecast {
       return formattedResult;
 
     } catch (error) {
-      console.error('Failed to fetch beach forecasts:', error);
-      return [];
+      throw new ForecastProcessingInternalError((error as Error).message)
     }
   }
 
