@@ -7,9 +7,6 @@ import { Request, Response } from "express";
 export class ForecastController {
   @Get("")
   public getForecastForLoggedUser(req: Request, res: Response): void {
-    const x = new StormGlass()
-
-    x.fetchPoints(100, 300)
 
     res.json([
       {
