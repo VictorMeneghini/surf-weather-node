@@ -11,8 +11,9 @@
     "dev": "ts-node-dev 'src/index.ts'",
     "prettier": "prettier --check  'src/**/*.ts' 'test/**/*.ts'",
     "prettier:fix": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
-    "test": "jest",
-    "test:functional": "jest --projects  ./test --runInBand --detectOpenHandles"
+    "test:unit": "jest",
+    "test:functional": "jest --projects  ./test --runInBand --detectOpenHandles",
+    "test": "npm run test:unit && npm run test:functional"
   },
   "author": "Victor Meneghini",
   "license": "ISC",
