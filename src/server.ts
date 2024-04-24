@@ -1,8 +1,10 @@
+import "./util/module-alias";
+
 import { Server } from "@overnightjs/core";
 import { ForecastController } from "@src/controller/forecast";
-import "./util/module-alias";
 import express, { Application } from "express";
 import * as database from "./database";
+import { BeachesController } from "./controller/beaches";
 
 export class SetupServer extends Server {
   constructor(private port = 3000) {
@@ -15,13 +17,20 @@ export class SetupServer extends Server {
     await this.databaseSetup()
   }
 
+  public start(): void {
+    this.app.listen(this.port, () => {
+      console.info("Server Started :: PORT", this.port)
+    })
+  }
+
   private setupExpress(): void {
     this.app.use(express.json());
   }
 
   private setupControllers(): void {
     const forecastController = new ForecastController();
-    this.addControllers([forecastController]);
+    const beachesControlller = new BeachesController()
+    this.addControllers([forecastController, beachesControlller]);
   }
 
   private async databaseSetup(): Promise<void> {
